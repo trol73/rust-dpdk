@@ -157,6 +157,9 @@ pub trait EthDevice {
     /// Send a burst of output packets on a transmit queue of an Ethernet device.
     fn tx_burst(&self, queue_id: QueueId, rx_pkts: &mut [mbuf::RawMbufPtr]) -> usize;
 
+    fn rx_burst_ex(&self, queue_id: QueueId, rx_pkts: &mut [mbuf::RawMbufPtr], packets: u16) -> u16;
+    fn tx_burst_ex(&self, queue_id: QueueId, rx_pkts: &mut [mbuf::RawMbufPtr], packets: u16) -> u16;
+
     /// Set RX L2 Filtering mode of a VF of an Ethernet device.
     fn set_vf_rxmode(&self, vf: u16, rx_mode: EthVmdqRxMode, on: bool) -> Result<&Self>;
 
@@ -410,6 +413,19 @@ impl EthDevice for PortId {
             }
         }
     }
+
+    fn rx_burst_ex(&self, queue_id: QueueId, rx_pkts: &mut [mbuf::RawMbufPtr], packets: u16) -> u16 {
+        unsafe {
+            _rte_eth_rx_burst(*self, queue_id, rx_pkts.as_mut_ptr(), packets)
+        }
+    }
+
+    fn tx_burst_ex(&self, queue_id: QueueId, rx_pkts: &mut [mbuf::RawMbufPtr], packets: u16) -> u16 {
+        unsafe {
+            _rte_eth_tx_burst(*self, queue_id, rx_pkts.as_mut_ptr(), packets)
+        }
+    }
+
 
     fn set_vf_rxmode(&self, vf: u16, rx_mode: EthVmdqRxMode, on: bool) -> Result<&Self> {
         rte_check!(unsafe {
