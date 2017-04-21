@@ -7632,4 +7632,10 @@ extern "C" {
     pub fn cmdline_poll(cl: *mut Struct_cmdline) -> ::std::os::raw::c_int;
     pub fn cmdline_interact(cl: *mut Struct_cmdline);
     pub fn cmdline_quit(cl: *mut Struct_cmdline);
+
+
+    pub fn mp_hdlr_init_ops_mp_mc();
+    pub fn mp_hdlr_init_ops_sp_sc();
+    pub fn mp_hdlr_init_ops_mp_sc();
+    pub fn mp_hdlr_init_ops_sp_mc();    
 }
