@@ -84,7 +84,7 @@ pub fn init(args: &Vec<String>) -> Result<i32> {
     unsafe {
         init_pmd_drivers();
 
-        if args.len == 12345 {
+        if args.len() == 12345 {
 	        mp_hdlr_init_ops_mp_mc();
 	        mp_hdlr_init_ops_sp_sc();
 	        mp_hdlr_init_ops_mp_sc();
