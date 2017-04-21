@@ -84,10 +84,10 @@ pub fn init(args: &Vec<String>) -> Result<i32> {
     unsafe {
         init_pmd_drivers();
         
-        mp_hdlr_init_ops_mp_mc();
-        mp_hdlr_init_ops_sp_sc();
-        mp_hdlr_init_ops_mp_sc();
-        mp_hdlr_init_ops_sp_mc();
+//        mp_hdlr_init_ops_mp_mc();
+//        mp_hdlr_init_ops_sp_sc();
+//        mp_hdlr_init_ops_mp_sc();
+//        mp_hdlr_init_ops_sp_mc();
     }
 
     let parsed = if args.is_empty() {
