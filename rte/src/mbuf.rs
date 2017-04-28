@@ -169,7 +169,7 @@ pub type RawMbufPtr = *mut ffi::Struct_rte_mbuf;
 #[macro_export]
 macro_rules! pktmbuf_mtod_offset {
     ($m:expr, $t:ty, $off:expr) => (unsafe {
-        (((*$m).buf_addr as *const ::std::os::raw::c_char).offset((*$m).data_off as isize) as $t)
+        (((*$m).buf_addr as *const ::std::os::raw::c_char).offset((*$m).data_off as isize + ($off as usize)) as $t)
     })
 }
 
